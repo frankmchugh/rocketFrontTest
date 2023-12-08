@@ -2,11 +2,42 @@
     margin: 0;
     padding: 0;
     font-family: monospace;
+    font-size: 17px;
 
-
-  background-color: #f92;
-  color: #17f;
+    background-color: #f92;
+    color: #17f;
 }
+
+
+button {
+    padding: 6px;
+    background-color: green;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+
+}
+
+
+h3 {
+
+    font-size: 40px;
+    background-color: #fff;
+
+}
+
+
+input {
+    background: #fff;
+}
+
+
+table {
+    background-color: #fff;
+}
+
+
+
 
 .navContainer {
     width: 100%;
@@ -24,14 +55,15 @@
 
 .navbar {
     display: flex;
-    
+
     position: sticky;
     width: 100%;
-    height:auto;
-    padding: 1vh 0;
+    height: auto;
+    padding: 1vh 6vw !important;
     align-items: center;
     justify-content: center;
-    gap: 6rem;
+    gap: 4rem;
+    font-size: 17px;
     border-bottom: 0.5px white solid;
 
 
@@ -40,12 +72,12 @@
 
 .logo {
 
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
 }
 
 
-.logo > img {
+.logo>img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -63,16 +95,34 @@
 
 .balances {
     display: flex;
-   
+
     align-items: center;
     justify-content: center;
-    gap: 0.7rem;
+    gap: 1rem;
+}
+
+.balances>p>span {
+    font-weight: 500;
+    color: green;
 }
 
 
+.navButtonCont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: auto;
+}
 
-.navButtonCont > button {
-    
+
+.hidden {
+    display: none;
+}
+
+
+.navButtonCont>button {
+
     padding: 6px;
     background-color: green;
     color: white;
@@ -91,7 +141,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-   
+
 }
 
 .introWrapper {
@@ -99,26 +149,26 @@
     display: flex;
     align-items: center;
     justify-content: center;
-   
+
 }
 
 .introLeft {
     display: flex;
-   align-items: flex-start;
+    align-items: flex-start;
     justify-content: flex-start;
     flex-direction: column;
     gap: 2rem;
     width: 50%;
     padding: 10px;
-    
+
 }
 
-.introLeft > h1 {
+.introLeft>h1 {
     font-size: 50px;
 }
 
 
-.introLeft > p {
+.introLeft>p {
     text-align: left;
     width: 80%;
     font-size: 20px;
@@ -145,7 +195,7 @@
 
 
 
-.introButtonCont > button {
+.introButtonCont>button {
     padding: 6px;
     background-color: green;
     color: white;
@@ -185,16 +235,17 @@
     background: lightgray !important;
     font-size: 20px;
 
-    border-right:  0.5px white solid; ;
+    border-right: 0.5px white solid;
+    ;
 }
 
 .firstLeftImg {
     width: 200px;
-    height:150px
+    height: 150px
 }
 
 
-.firstLeftImg  > img {
+.firstLeftImg>img {
     width: 100%;
     height: 100%;
 
@@ -210,7 +261,7 @@
 }
 
 
-.firstLeftButtonCont > button {
+.firstLeftButtonCont>button {
     padding: 6px;
     background-color: green;
     color: white;
@@ -220,7 +271,9 @@
 
 }
 
-.firstLeft > p, .firstLeft > h3, .firstLeft > h4 {
+.firstLeft>p,
+.firstLeft>h3,
+.firstLeft>h4 {
     background: lightgray !important;
 }
 
@@ -235,15 +288,19 @@
     justify-content: center;
     font-size: 20px;
 
-    gap:2rem;
+    gap: 2rem;
 }
 
 
-.firstRight > p, .firstRight > h3, .firstRight > h4 {
+.firstRight>p,
+.firstRight>h3,
+.firstRight>h4 {
     background: white !important;
+    text-align: center;
+    width: 80%;
 }
 
-.firstLeft > hr {
+.firstLeft>hr {
     color: black;
 }
 
@@ -256,12 +313,12 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-   
+
 }
 
 .mintWrapper {
 
-    width: 80%;
+    width: 60%;
     height: auto;
     padding: 2vh 0;
     display: flex;
@@ -276,15 +333,366 @@
 
 }
 
-.mintWrapper > h3 {
+.mintWrapper>h3 {
     font-size: 40px;
     background-color: #fff;
+    text-align: center;
 }
 
 
-.mintWrapper > input, .mintWrapper > div {
-    
+.mintWrapper>input,
+.mintWrapper>div {
+
     background-color: #fff;
 }
 
 
+.rewardContainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    padding: 10vh 0;
+    padding-bottom: 15vh;
+
+}
+
+
+.rewardWrapper {
+    width: 60%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 0.6rem;
+    padding: 2vh 0;
+    font-size: 20px;
+    background: #fff;
+    border-radius: 20px;
+
+}
+
+
+.rewardWrapper>p {
+    background: #fff;
+    width: 80%;
+    text-align: center;
+
+}
+
+
+.rewardWrapper>h3 {
+    text-align: center;
+
+}
+
+
+.rewardWrapper>p>span {
+    color: green;
+    font-weight: 600;
+    background: #fff;
+    text-align: center;
+}
+
+
+.totalContainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    padding: 10vh 0;
+
+}
+
+
+.totalContainer>h2 {
+    text-align: center;
+    font-size: 40px;
+    text-align: center;
+}
+
+
+
+
+
+.logContainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    padding: 10vh 0;
+
+}
+
+
+
+.logWrapper {
+
+    width: 60%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2vh 2vw;
+    font-size: 20px;
+    background: #fff;
+    border-radius: 20px;
+
+}
+
+
+.logWrapper>table {
+    background: #fff;
+}
+
+
+.logWrapper>table>tbody>tr>td {
+    background: #fff !important;
+    padding: 5px;
+}
+
+
+.logWrapper>table>thead>tr>th {
+    background: lightgray;
+    padding: 5px;
+    font-size: 15px;
+}
+
+
+.nodeContainer {
+    width: 100%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #333;
+    padding: 10vh 0;
+}
+
+
+.nodeContainer>h2 {
+    font-size: 40px;
+    margin-bottom: 2vh;
+    background-color: #333;
+    text-align: center;
+}
+
+
+.upperWrapper {
+    width: 50%;
+    height: auto;
+    display: flex;
+    border-radius: 20px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+
+}
+
+
+.littleWrapper {
+    width: 50%;
+    background: lightgray !important;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+
+    padding: 2vh 0;
+    gap: 1rem;
+
+
+
+}
+
+
+.littleWrapper>h3 {
+    font-size: 20px;
+    text-align: center;
+    background: lightgray !important;
+    text-align: center;
+}
+
+
+#specialLine {
+
+    background: #fff !important;
+
+}
+
+#specialLine>h3 {
+    background: #fff !important;
+    text-align: center;
+
+
+}
+
+
+
+.accountWrapper {
+    width: 30%;
+    background: #fff;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    overflow: hidden;
+    padding: 2vh 0;
+    gap: 1rem;
+
+    margin: 2vh 0;
+
+}
+
+
+.accountWrapper>h3 {
+    font-size: 27px;
+    text-align: center;
+}
+
+
+
+.footer {
+    width: 100%;
+    height: auto;
+
+    margin: 4vh 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.footerWrapper {
+    width: 40%;
+    border-radius: 20px;
+    background: lightgray;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 3vh 0;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.footerWrapper>a,
+.footerWrapper>p {
+    font-size: 17px;
+    background: lightgray;
+    width: 80%;
+    text-align: center;
+}
+
+
+.footerWrapper>.row {
+
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    background: lightgray;
+}
+
+
+.footerWrapper>.row>p,
+.footerWrapper>.row>a {
+
+    font-size: 17px;
+    background: lightgray;
+    text-align: center;
+
+}
+
+
+.footerWrapper>.row>p>span {
+    background-color: lightgray;
+    font-weight: 500;
+    color: green;
+    word-wrap: break-word;
+    text-align: center;
+
+}
+
+
+.footerWrapper>p>span {
+    background-color: lightgray;
+    font-weight: 500;
+    color: green;
+    word-wrap: break-word;
+    text-align: center;
+
+}
+
+
+
+
+
+
+@media (max-width: 1000px) {
+
+
+    .navbar {
+
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+
+
+
+
+
+    }
+
+
+    .balances {
+        text-align: center;
+        gap: 0.2rem;
+    }
+
+
+    .introWrapper {
+        flex-direction: column-reverse;
+        gap: 2rem;
+    }
+
+
+    .logWrapper {
+
+        width: 80%;
+    }
+
+
+    .footerWrapper {
+        width: 80%;
+
+
+
+    }
+
+
+
+
+
+
+}
