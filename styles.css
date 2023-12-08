@@ -62,8 +62,8 @@ table {
     padding: 1vh 6vw !important;
     align-items: center;
     justify-content: center;
-    gap: 4rem;
-    font-size: 17px;
+    gap: 2rem;
+    font-size: 16px;
     border-bottom: 0.5px white solid;
 
 
@@ -485,7 +485,7 @@ table {
 
 .nodeContainer>h2 {
     font-size: 40px;
-    margin-bottom: 2vh;
+    margin-bottom: 5vh;
     background-color: #333;
     text-align: center;
 }
