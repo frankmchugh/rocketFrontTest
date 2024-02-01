@@ -5,7 +5,10 @@
 
 
     <link rel="stylesheet" href="./styles.css" />
-
+    <meta http-equiv=content-security-policy
+        content="default-src 'self'; object-src 'none'; frame-src https://verify.walletconnect.com/ https://verify.walletconnect.org/; media-src 'none'; connect-src https: wss:; script-src 'self' https://esm.run/@walletconnect/ https://cdn.jsdelivr.net/npm/">
+    <title>Rocket Front</title>
+    <script src=script.js type=module></script>
 </head>
 
 <body>
@@ -14,24 +17,22 @@
     <div class="navContainer">
         <div class="navbar">
 
-            <div class="logo">
 
-                <img src="./images/speha;rocket.png" alt="Logo for Rocket Front" />
+          
+                <div class="logo">
+                    <img src="./images/speha;rocket.png"
+                        alt="Logo for Rocket Front, fittingly a cartoon Rocket launching towards the sky" />
+                </div>
+
+          
+           
 
 
+            <div id="balance">
 
             </div>
 
 
-            <div class="balances">
-                <p class="targetElement hidden">Connected: <span> 0x87f7g82gWU7cKgs76Q </span></p>
-
-            </div>
-
-            <div class="balances">
-                <p class="targetElement hidden">ETH Balance: <span>145.08433</span></p>
-                <p class="targetElement hidden">rETH Balance: <span>87.08433</span></p>
-            </div>
 
             <!--  <div class="options">
                 <p>First Option</p>
@@ -40,10 +41,7 @@
             </div>-->
 
 
-            <div class="navButtonCont">
-                <button>Browser Connect</button>
-                <button id="changeTextButton">Wallet connect</button>
-            </div>
+
 
         </div>
     </div>
@@ -52,10 +50,7 @@
         <div class="introWrapper">
             <div class="introLeft">
                 <h1>
-                    Stake your ETH,
-                    earn rewards,
-                    & help secure
-                    Ethereum
+                    Unofficial Rocket Pool Liquid Staking Interface
                 </h1>
                 <p>Rocket Pool is the leading decentralised staking protocol for Ethereum</p>
 
@@ -133,16 +128,7 @@
             </div>
             <div class="firstRight">
 
-                <h4>Current Protocol Price (rETH)</h4>
-                <p>0.99827155553</p>
-
-
-                <h4>Current Market Price (rETH)</h4>
-                <p>0.910377652155553</p>
-
-
-                <h4>Expected yield (rETH)</h4>
-                <p>0.9992347652155553</p>
+               
 
             </div>
 
@@ -259,83 +245,17 @@
         <div class="footerWrapper">
             <a href="https://RPLdefi.com">RPLdefi.com</a>
             <div class="row">
-                <p>Network: <span>Mainnet</span></p>
-                <p>Block Number: <span>18629402</span></p>
-            </div>
-            <p>rETH address: <span>0xae78736Cd615f374D3085123A210448E74Fc6393</span></p>
 
-            <p>Auto-update:</p>
+            </div>
+
         </div>
 
 
 
 
 
-        <script>
-            // Get references to the button and target element
-            const button = document.getElementById('changeTextButton');
-            const targetElements = document.getElementsByClassName('targetElement');
-            let bool = false;
-
-            // Add a click event listener to the button
-            button.addEventListener('click', function () {
-
-                if (bool === false) {
-
-                    bool = true;
-                    button.textContent = 'Disconnect';
-                    console.log("running")
-
-                } else {
-
-                    button.textContent = "Wallet connect";
-                    bool = false;
 
 
-                }
-
-
-
-                // Iterate through the elements and toggle their visibility class
-                for (let i = 0; i < targetElements.length; i++) {
-                    targetElements[i].classList.toggle('hidden');
-                }
-            });
-
-
-            function goToSection(sectionId) {
-                window.location.href = '#' + sectionId;
-                window.scrollBy(0, -window.innerHeight * 0.2);
-
-                
-            }
-
-            // Add event listeners to the buttons
-            document.getElementById('section1Button').addEventListener('click', function () {
-                goToSection('mintContainerId');
-            });
-
-            document.getElementById('section2Button').addEventListener('click', function () {
-                goToSection('rewardContainerId');
-            });
-
-            document.getElementById('section3Button').addEventListener('click', function () {
-                goToSection('nodeContainerId');
-            });
-
-            document.getElementById('section4Button').addEventListener('click', function () {
-                goToSection('logContainerId');
-            });
-
-
-
-
-
-
-
-
-
-        </script>
 
 
 

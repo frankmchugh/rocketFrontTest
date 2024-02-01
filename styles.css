@@ -59,14 +59,31 @@ table {
     position: sticky;
     width: 100%;
     height: auto;
-    padding: 1vh 6vw !important;
+    padding: 2vh 0 !important;
     align-items: center;
+ 
     justify-content: center;
     gap: 2rem;
-    font-size: 16px;
+    font-size: 14px;
     border-bottom: 0.5px white solid;
 
 
+
+}
+
+
+.navTopWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+
+.navTopWrapper > h2 {
+    font-size: 40px;
+    font-weight: 600;
+    text-transform: uppercase;
 
 }
 
@@ -93,6 +110,15 @@ table {
 }
 
 
+#balance {
+    display: flex;
+    align-items: center;
+    
+    justify-content: center;
+    gap: 1rem;
+}
+
+
 .balances {
     display: flex;
 
@@ -101,10 +127,181 @@ table {
     gap: 1rem;
 }
 
+
+#balance > .status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 1rem;
+    flex-direction: column;
+}
+
+
+
+
+#balance > label, #balance > span {
+    display: flex;
+    gap: 1rem;
+}
+
+
+
+#balance > .wallet {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  
+
+    
+}
+
+
+
+#balance > .wallet > input {
+
+
+    padding: 6px;
+    background-color: green;
+    color: white;
+    font-size: 20px;
+
+    
+    cursor: pointer;
+    transition: all  0.2s ease-in-out;
+
+   
+
+
+
+
+
+}
+
+
+
+
+
+
+#balance > .wallet > label {
+    display: flex;
+    gap: 0.5rem;
+   
+}
+
+#balance > .wallet > input:hover {
+
+    color: #222;
+    background-color: white;
+
+}
+
+
+ #balance > label > .address  {
+    width: auto;
+    display: flex;
+    align-items: center;
+
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 15px;
+
+
+
+ }
+
+ #balance > label > .address > span {
+    background: #fff;
+ }
+
+
+
+
+#balance > .balance > input, #balance > label > .address > input  {
+    background-color: transparent;
+   
+    
+    font-size: 15px;
+    border: none;
+    outline: none;
+    pointer-events: none;
+}
+
+#balance > .balance {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.1rem;
+    width: auto;
+    padding: 5px;
+    border-radius: 20px;
+  font-size: 15px;
+    overflow: hidden;
+    background-color: #fff;
+   
+
+
+}
+
+#balance > .balance > label {
+    background-color: #fff;
+   font-size: 15px;
+   text-align: center;
+   
+ 
+}
+
+
+#balance > .balance > span {
+    background-color: #fff;
+}
+
+
+
+
+
+#balance > label {
+    border-radius: 20px;
+    
+    overflow: hidden;
+    background-color: #fff;
+    padding: 5px;
+        
+    border: none;
+    outline: none;
+    pointer-events: none;
+
+}
+
+
+#balance > label > .address {
+    background: #fff;
+}
+
+#balance > span {
+
+
+}
+
+#balance > span > label {
+
+}
+
+
+
 .balances>p>span {
     font-weight: 500;
     color: green;
 }
+
+.hidden {
+    max-height: 0;
+    overflow: hidden;
+}
+
 
 
 .navButtonCont {
@@ -165,6 +362,7 @@ table {
 
 .introLeft>h1 {
     font-size: 50px;
+    width: 90%;
 }
 
 
@@ -182,6 +380,13 @@ table {
     flex-direction: column;
     width: 50%;
     padding: 10px;
+}
+
+
+.introRight > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 
@@ -289,6 +494,28 @@ table {
     font-size: 20px;
 
     gap: 2rem;
+}
+
+.firstRight > .prices {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 1vh 0;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: transparent;
+    gap: 2rem;
+
+
+
+}
+
+
+.firstRight > .prices > span {
+    text-align: center;
+    background: transparent;
+    font-size: 20px;
 }
 
 
@@ -613,6 +840,32 @@ table {
 }
 
 
+.row > .status {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    background: transparent
+}
+
+.row > div {
+    background-color: transparent;
+}
+
+.row > .status > span {
+    background: transparent;
+    font-size: 20px;
+}
+
+
+.row > .status > span > label {
+    background-color: transparent;
+}
+
+
+
+
 .footerWrapper>.row>p,
 .footerWrapper>.row>a {
 
@@ -647,7 +900,7 @@ table {
 
 
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
 
 
     .navbar {
@@ -671,6 +924,11 @@ table {
     }
 
 
+    #balance {
+        flex-direction: column;
+    }
+
+
     .introWrapper {
         flex-direction: column-reverse;
         gap: 2rem;
@@ -680,6 +938,7 @@ table {
     .logWrapper {
 
         width: 80%;
+      
     }
 
 
@@ -689,6 +948,13 @@ table {
 
 
     }
+
+
+    .footerWrapper > a, .footerWrapper>.row>p {
+        font-size: 3em;
+    }
+
+   
 
 
 
