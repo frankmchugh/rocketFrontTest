@@ -1,8 +1,11 @@
+
 import { ethers } from './node_modules/ethers/dist/ethers.min.js'
 import wcPkg from "https://esm.run/@walletconnect/ethereum-provider/dist/index.umd.js"
 const EthereumProvider = wcPkg.EthereumProvider
 
 const walletConnectProjectId = 'b0865b6ca065423e47b7d6dffa2f5e18'
+
+const rETHcontract = '0xae78736Cd615f374D3085123A210448E74Fc6393';
 
 const title = document.createElement('h1')
 const accountLabel = document.createElement('label')
@@ -15,6 +18,529 @@ const rETHApprovalsDiv = document.createElement('div')
 const walletSelectDiv = document.createElement('div')
 const statusDiv = document.createElement('div')
 const loading = document.createElement("p");
+const mintCheckbox = document.querySelector("#mint");
+const burnCheckbox = document.querySelector("#burn");
+const mintBtn = document.querySelector("#mintBtn");
+const mintInput = document.getElementById("mintInput");
+const burnBtn = document.querySelector("#burnBtn");
+const errorMessageEl = document.getElementById('errorMsg');
+const successMessageEl = document.getElementById('successMsg')
+
+
+const ERC20_ABI = [
+    {
+        "inputs": [
+            {
+                "internalType": "contract RocketStorageInterface",
+                "name": "_rocketStorageAddress",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "Approval",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "time",
+                "type": "uint256"
+            }
+        ],
+        "name": "EtherDeposited",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "ethAmount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "time",
+                "type": "uint256"
+            }
+        ],
+        "name": "TokensBurned",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "ethAmount",
+                "type": "uint256"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "time",
+                "type": "uint256"
+            }
+        ],
+        "name": "TokensMinted",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "from",
+                "type": "address"
+            },
+            {
+                "indexed": true,
+                "internalType": "address",
+                "name": "to",
+                "type": "address"
+            },
+            {
+                "indexed": false,
+                "internalType": "uint256",
+                "name": "value",
+                "type": "uint256"
+            }
+        ],
+        "name": "Transfer",
+        "type": "event"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "owner",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            }
+        ],
+        "name": "allowance",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "approve",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "account",
+                "type": "address"
+            }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_rethAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "burn",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "decimals",
+        "outputs": [
+            {
+                "internalType": "uint8",
+                "name": "",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "subtractedValue",
+                "type": "uint256"
+            }
+        ],
+        "name": "decreaseAllowance",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "depositExcess",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "depositExcessCollateral",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getCollateralRate",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_rethAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "getEthValue",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getExchangeRate",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_ethAmount",
+                "type": "uint256"
+            }
+        ],
+        "name": "getRethValue",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getTotalCollateral",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "addedValue",
+                "type": "uint256"
+            }
+        ],
+        "name": "increaseAllowance",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "_ethAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "_to",
+                "type": "address"
+            }
+        ],
+        "name": "mint",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "name",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "totalSupply",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "transfer",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address",
+                "name": "sender",
+                "type": "address"
+            },
+            {
+                "internalType": "address",
+                "name": "recipient",
+                "type": "address"
+            },
+            {
+                "internalType": "uint256",
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "transferFrom",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "version",
+        "outputs": [
+            {
+                "internalType": "uint8",
+                "name": "",
+                "type": "uint8"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "stateMutability": "payable",
+        "type": "receive"
+    }
+]
+
+
+console.log("problem ok")
+
+
 
 
 const navContainer = document.querySelector("#balance")
@@ -22,6 +548,7 @@ const navContainer = document.querySelector("#balance")
 title.innerText = 'Unofficial Rocket Pool Liquid Staking Interface'
 statusDiv.innerText = 'loading...'
 
+console.log("Spot 1");
 
 /*document.querySelector('body').append(
   title,
@@ -36,11 +563,7 @@ statusDiv.innerText = 'loading...'
 )*/
 
 navContainer.append(
-   
-    
-    
     accountLabel,
-  
     rETHBalanceDiv,
     ETHBalanceDiv,
     walletSelectDiv
@@ -58,14 +581,27 @@ document.querySelector(".row").append(
 
 document.querySelector(".firstRight").append(
 
-rETHPricesDiv,
-rETHHistoryDiv
+    rETHPricesDiv,
+    rETHHistoryDiv
 
 )
+
+
 
 let browserProvider = new ethers.BrowserProvider(window.ethereum)
 let signer
 let network = { name: 'mainnet', chainId: '0x1' }
+
+
+console.log("Spot 2");
+
+
+const etherscanLinkEL = document.getElementById('etherscan-link');
+const openseaLinkEL = document.getElementById('opensea-link');
+
+
+
+
 
 if ('request' in browserProvider) {
     await browserProvider
@@ -82,12 +618,28 @@ let provider = new ethers.FallbackProvider(providers)
 // TODO: make network configurable
 // TODO: allow custom RPC?
 
-const rocketStorageAddress = await provider.resolveName('rocketstorage.eth')
+
+
+
+
+const rocketStorageAddress = '0x1d8f8f00cfa6758d7bE78336684788Fb0ee0Fa46'
+
+
+
 const rocketStorage = new ethers.Contract(rocketStorageAddress,
     ['function getAddress(bytes32) view returns (address)'],
     provider)
+
+
+
 const getRocketAddress = name => rocketStorage['getAddress(bytes32)'](ethers.id(`contract.address${name}`))
-const rocketToken = new ethers.Contract(await getRocketAddress('rocketTokenRETH'),
+
+console.log(getRocketAddress("rocketTokenRETH"));
+
+
+
+
+const rocketToken = new ethers.Contract("0xae78736Cd615f374D3085123A210448E74Fc6393",
     ['function balanceOf(address) view returns (uint256)',
         'function allowance(address _owner, address _spender) view returns (uint256)',
         'function getExchangeRate() view returns (uint256)',
@@ -95,7 +647,17 @@ const rocketToken = new ethers.Contract(await getRocketAddress('rocketTokenRETH'
     ],
     provider)
 
+
+console.log("Spot 3");
+
+
+
+
+
+
 function createAddressInput() {
+
+    console.log("Spot Create Address fine");
     const div = document.createElement('div')
     const input = document.createElement('input')
     const span = document.createElement('span')
@@ -354,6 +916,21 @@ browserWalletRadio.checked = true
 
 window.ethereum.on('accountsChanged', connectBrowserAccount)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // TODO: make accountInput a state machine
 
 async function connectBrowserAccount(accounts) {
@@ -371,13 +948,136 @@ async function connectBrowserAccount(accounts) {
         accountInput.input.style.width = 'auto'
         accountInput.input.dispatchEvent(new Event('change'))
         accountInput.input.setAttribute('readonly', '')
-        
+
 
     }
     else {
         // TODO: any checks required if account has not changed?
     }
 }
+
+
+const mint = async () => {
+
+
+    //depositPoolContract deposit function instead of MINT
+    //
+
+
+    console.log("Mint started...");
+
+    etherscanLinkEL.style.display = "none";
+    openseaLinkEL.style.display = "none";
+
+
+
+    mintBtn.innerHTML = "Minting...";
+    mintBtn.disabled = true;
+
+
+    let provider = new ethers.BrowserProvider(window.ethereum)
+
+ 
+    let signer = await browserProvider.getSigner()
+
+
+    //change ABI & address:  https://etherscan.io/address/0xdd3f50f8a6cafbe9b31a427582963f465e745af8#writeContract
+
+
+    const rocketPoolDepositContract = new ethers.Contract("0xDD3f50F8A6CafbE9b31a427582963f465E745AF8",
+        [
+            'function deposit() payable external',
+
+        ])
+
+
+        
+
+
+
+    
+
+    try {
+
+
+
+
+
+        let amount = mintInput.value;
+
+        let formatted = ethers.parseEther(amount)
+
+        console.log(formatted);
+        console.log(Object.values(rocketPoolDepositContract))
+
+
+        //const tx = await signer.sendTransaction(rocketPoolDepositContract.deposit({ value: formatted }))
+
+        //change function call too
+        const tx = await  rocketPoolDepositContract.connect(signer).deposit({ value: formatted });
+
+   
+        console.log(`Transaction hash: ${tx.hash}`);
+        const tx_hash = await tx.wait();
+        console.log("tx_hash:" + tx_hash);
+        const send = await signer.sendTransaction({tx})
+        successMessageEl.innerHTML = "Successfully Minted";
+        mintBtn.innerHTML = "Mint";
+        mintBtn.disabled = false;
+
+        console.log(`Transaction confirmed in block ${tx.bloc}`);
+        console.log(`Gas used: ${tx_hash.gasUsed.toString()}`);
+
+
+
+    } catch (e) {
+        errorMessageEl.innerHTML = `${e.message}`;
+        console.log(e.message)
+        mintBtn.innerHTML = "Mint";
+        mintBtn.disabled = false;
+    }
+}
+
+
+
+function initializeApp() {
+    console.log("Going at least");
+
+
+
+    mintCheckbox.addEventListener("change", function () {
+        console.log("Running Mint Select");
+        if (mintCheckbox.checked) {
+            burnCheckbox.checked = false;
+            mintBtn.classList.remove("hidden2");
+            burnBtn.classList.add("hidden2");
+        } else {
+            mintBtn.classList.add("hidden2");
+        }
+    });
+
+    burnCheckbox.addEventListener("change", function () {
+        console.log("Running Burn Select");
+        if (burnCheckbox.checked) {
+            mintCheckbox.checked = false;
+            burnBtn.classList.remove("hidden2");
+            mintBtn.classList.add("hidden2");
+        } else {
+            burnBtn.classList.add("hidden2");
+        }
+    });
+
+
+
+
+
+
+    mintBtn.addEventListener("click", mint);
+}
+
+
+document.addEventListener("DOMContentLoaded", initializeApp);
+
 
 const wcEthereum = await EthereumProvider.init({
     projectId: walletConnectProjectId,
@@ -460,8 +1160,17 @@ statusDiv.append(
     statusTokenAddress,
     statusBlockNumber,
     statusUpdateControl
- 
+
 )
+
+
+
+
+
+
+
+
+
 
 
 
@@ -540,7 +1249,87 @@ catch (err) {
     console.error(err)
 }
 
+
+//Display functionality for MINT/BURN, controlling the interface
+
+
+
 // TODO: form to mint (stake ETH) rETH
+
+
+
+
+/*const mint = async () => {
+    const quantity = 1;
+    etherscanLinkEL.style.display = "none";
+    openseaLinkEL.style.display = "none";
+
+    mintBtn.innerHTML = "Minting...";
+    mintBtn.disabled = true;
+
+    if (ethereum && isMetamaskInstalled) {
+
+        try {
+
+            const _quantity = ethers.utils.formatUnits(quantity, 0);
+            const accounts = await provider.send("eth_requestAccounts", []);
+            const signer = provider.getSigner();
+
+            const _contract = new ethers.Contract(CONTRACT_ADDRESS,
+                ERC721A_ABI, signer);
+
+            const fetchCost = await _contract.cost();
+            const _cost = ethers.utils.formatEther(fetchCost);
+            const _total = ethers.utils.parseEther(`${_cost}`).mul(_quantity);
+            debugger;
+
+            const tx = await _contract.mint(_quantity, {
+                gasPrice: 20e9,
+                value: _total
+            });
+
+
+            console.log(`Transaction hash: ${tx.hash}`);
+
+            const tx_hash = await tx.wait();
+            console.log('TRANSACTION ------------////');
+            console.log(tx_hash);
+            successMessageEl.innerHTML = "Successfully Minted";
+            mintBtn.innerHTML = "Mint";
+            mintBtn.disabled = false;
+
+             console.log(`Transaction confirmed in block ${tx.bloc}`);
+             console.log(`Gas used: ${tx_hash.gasUsed.toString()}`);
+
+            etherscanLinkEL.setAttribute("href", `https://rinkeby.etherscan.io/tx/${tx.hash}`);
+            etherscanLinkEL.style.display = "block";
+
+            // openseaLinkEL.setAttribute("href", `https://testnets.opensea.io/account`);
+            const _opensea_url =
+                `https://testnets.opensea.io/assets/${String(CONTRACT_ADDRESS).toLocaleLowerCase()}/${_totalSupply}`;
+            openseaLinkEL.setAttribute("href", _opensea_url);
+            console.log('OPENSEA URL -----------///');
+            console.log(_opensea_url);
+
+            openseaLinkEL.style.display = "block";
+            await contractUpdate();
+
+        } catch (e) {
+            errorMessageEl.innerHTML = `${e.message}`;
+            mintBtn.innerHTML = "Mint";
+            mintBtn.disabled = false;
+        }
+    } else {
+        mintBtn.innerHTML = "Mint"
+        errorMessageEl.innerHTML = "Please Install Metamask.";
+        mintBtn.disabled = false;
+
+    }
+} */
+
+
+
+
 // TODO: form to burn (unstake ETH) rETH
 // TODO: allowance of swap contract for rETH when unstaking
 // preview amounts swapped via which routes, fees and gas fees etc.

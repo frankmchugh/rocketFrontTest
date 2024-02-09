@@ -91,15 +91,23 @@
             <h3>Mint/burn rETH</h3>
 
             <div class="mintInputs">
-                MINT: <input type="checkbox" />
-                BURN: <input type="checkbox" />
+                MINT: <input type="checkbox" id="mint" />
+                BURN: <input type="checkbox" id="burn" />
             </div>
 
 
-            Input ETH/rETH value:
-            <input type="text" />
+            <p>Input <span>ETH</span>/<span>rETH</span>value:</p>
+            <input type="text" id="mintInput" />
 
-            <button>Mint/Burn</button>
+            <button class="hidden2" id="mintBtn" >Mint</button>
+
+
+            <button class="hidden2" id="burnBtn" >Burn</button>
+
+            <a href="" id="etherscan-link" target="_blank">View on Etherscan</a>
+            <a href="" id="opensea-link" target="_blank">View on Opensea</a>
+           <p id='errorMsg'></p>
+           <p id='successMsg'></p>
 
 
 
@@ -149,7 +157,7 @@
     <div class="rewardContainer" id="rewardContainerId">
         <div class="rewardWrapper">
             <h3>rETH rewards</h3>
-            <p>Use our calculator to estimate your earnings over time. Over <span>$356000</span> saved so far!</p>
+            <p>Use our calculator to estimate your earnings over time. Over <span>$356000</span> saved so far! Total cost of acquisition and how much you acquired (ETH). Total proceeds from disposal and their average price (ETH). Total profit (the one minus the other)</p>
             <br />
 
 

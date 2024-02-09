@@ -303,6 +303,10 @@ table {
 }
 
 
+.hidden2  {
+    display: none;
+}
+
 
 .navButtonCont {
     display: flex;
@@ -568,7 +572,7 @@ table {
 
 
 .mintWrapper>input,
-.mintWrapper>div {
+.mintWrapper>div, .mintWrapper > p, .mintWrapper > p > span {
 
     background-color: #fff;
 }
@@ -956,6 +960,913 @@ table {
 
    
 
+
+
+
+
+
+}
+
+
+
+@media (max-width: 500px) {
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        font-family: monospace;
+        font-size: 40px;
+    
+        background-color: #f92;
+        color: #17f;
+    }
+    
+    
+    button {
+        padding: 6px;
+        background-color: green;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+    
+    }
+    
+    
+    h3 {
+    
+        font-size: 60px;
+        background-color: #fff;
+    
+    }
+    
+    
+    input {
+        background: #fff;
+    }
+    
+    
+    table {
+        background-color: #fff;
+    }
+    
+    
+    
+    
+    .navContainer {
+        width: 100%;
+        position: fixed;
+        height: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
+    
+    
+    
+    
+    
+    .navbar {
+        display: flex;
+    
+        position: sticky;
+        width: 100%;
+        height: auto;
+        padding: 2vh 0 !important;
+        align-items: center;
+     
+        justify-content: center;
+        gap: 2rem;
+        font-size: 40px;
+        border-bottom: 0.5px white solid;
+    
+    
+    
+    }
+    
+    
+    .navTopWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+ 
+    
+    .logo {
+    
+        width: 60px;
+        height: 60px;
+    }
+    
+    
+    .logo>img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    
+    .options {
+        display: flex;
+    
+        align-items: center;
+        justify-content: center;
+        gap: 0.7rem;
+    }
+    
+    
+    #balance {
+        display: flex;
+        align-items: center;
+        
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    
+    .balances {
+        display: flex;
+    
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+    }
+    
+    
+    #balance > .status {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+        gap: 1rem;
+        flex-direction: column;
+    }
+    
+    
+    
+    
+    #balance > label, #balance > span {
+        display: flex;
+        gap: 1rem;
+    }
+    
+    
+    
+    #balance > .wallet {
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+      
+    
+        
+    }
+    
+    
+    
+    #balance > .wallet > input {
+    
+    
+        padding: 6px;
+        background-color: green;
+        color: white;
+        font-size: 40px;
+    
+        
+        cursor: pointer;
+        transition: all  0.2s ease-in-out;
+    
+       
+    
+    
+    
+    
+    
+    }
+    
+    
+    
+    
+    
+    
+    #balance > .wallet > label {
+        display: flex;
+        gap: 0.5rem;
+       
+    }
+    
+    #balance > .wallet > input:hover {
+    
+        color: #222;
+        background-color: white;
+    
+    }
+    
+    
+     #balance > label > .address  {
+        width: auto;
+        display: flex;
+        align-items: center;
+    
+        justify-content: center;
+        gap: 0.5rem;
+        font-size: 40px;
+    
+    
+    
+     }
+    
+     #balance > label > .address > span {
+        background: #fff;
+     }
+    
+    
+    
+    
+    #balance > .balance > input, #balance > label > .address > input  {
+        background-color: transparent;
+       
+        
+        font-size: 40px;
+        border: none;
+        outline: none;
+        pointer-events: none;
+    }
+    
+    #balance > .balance {
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.1rem;
+        width: auto;
+        padding: 5px;
+        border-radius: 20px;
+      font-size: 40px;
+        overflow: hidden;
+        background-color: #fff;
+       
+    
+    
+    }
+    
+    #balance > .balance > label {
+        background-color: #fff;
+       font-size: 40px;
+       text-align: center;
+       
+     
+    }
+    
+    
+    #balance > .balance > span {
+        background-color: #fff;
+    }
+    
+    
+    
+    
+    
+    #balance > label {
+        border-radius: 20px;
+        
+        overflow: hidden;
+        background-color: #fff;
+        padding: 5px;
+            
+        border: none;
+        outline: none;
+        pointer-events: none;
+    
+    }
+    
+    
+    #balance > label > .address {
+        background: #fff;
+    }
+    
+    #balance > span {
+    
+    
+    }
+    
+    #balance > span > label {
+    
+    }
+    
+    
+    
+    .balances>p>span {
+        font-weight: 500;
+        color: green;
+    }
+    
+    .hidden {
+        max-height: 0;
+        overflow: hidden;
+    }
+    
+    
+    .hidden2  {
+        display: none;
+    }
+    
+    
+    .navButtonCont {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        width: auto;
+    }
+    
+    
+    .hidden {
+        display: none;
+    }
+    
+    
+    .navButtonCont>button {
+    
+        padding: 6px;
+        background-color: green;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+    }
+    
+    
+    .introContainer {
+    
+        padding-top: 20vh;
+        padding-bottom: 10vh;
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    
+    }
+    
+    .introWrapper {
+        width: 75%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    
+    }
+    
+    .introLeft {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+        gap: 2rem;
+        width: 50%;
+        padding: 10px;
+    
+    }
+    
+    .introLeft>h1 {
+        font-size: 50px;
+        width: 90%;
+    }
+    
+    
+    .introLeft>p {
+        text-align: left;
+        width: 80%;
+        font-size: 47px;
+    }
+    
+    
+    .introRight {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        width: 50%;
+        padding: 10px;
+    }
+    
+    
+    .introRight > img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    
+    
+    .introButtonCont {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 2rem;
+        width: 100%;
+    }
+    
+    
+    
+    .introButtonCont>button {
+        padding: 6px;
+        background-color: green;
+        color: white;
+        font-size: 45px;
+        cursor: pointer;
+    }
+    
+    .firstContainer {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 10vh 0;
+    }
+    
+    .firstWrapper {
+        width: 80%;
+        height: auto;
+        border-radius: 20px;
+        padding: 5px;
+        background: lightgray !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .firstLeft {
+        width: 50%;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        gap: 1rem;
+        padding: 10px;
+        background: lightgray !important;
+        font-size: 40px;
+    
+        border-right: 0.5px white solid;
+        ;
+    }
+    
+    .firstLeftImg {
+        width: 200px;
+        height: 150px
+    }
+    
+    
+    .firstLeftImg>img {
+        width: 100%;
+        height: 100%;
+    
+    }
+    
+    
+    
+    
+    
+    .firstLeftButtonCont {
+    
+        background: lightgray !important;
+    }
+    
+    
+    .firstLeftButtonCont>button {
+        padding: 6px;
+        background-color: green;
+        color: white;
+        font-size: 40px;
+        cursor: pointer;
+    
+    
+    }
+    
+    .firstLeft>p,
+    .firstLeft>h3,
+    .firstLeft>h4 {
+        background: lightgray !important;
+    }
+    
+    .firstRight {
+        width: 50%;
+        height: auto;
+        background: white !important;
+        display: flex;
+        align-items: center;
+        padding: 5vh 0;
+        flex-direction: column;
+        justify-content: center;
+        font-size: 45px;
+    
+        gap: 2rem;
+    }
+    
+    .firstRight > .prices {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        padding: 1vh 0;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: transparent;
+        gap: 2rem;
+    
+    
+    
+    }
+    
+    
+    .firstRight > .prices > span {
+        text-align: center;
+        background: transparent;
+        font-size: 45px;
+    }
+    
+    
+    .firstRight>p,
+    .firstRight>h3,
+    .firstRight>h4 {
+        background: white !important;
+        text-align: center;
+        width: 80%;
+    }
+    
+    .firstLeft>hr {
+        color: black;
+    }
+    
+    
+    .mintContainer {
+        width: 100%;
+        height: auto;
+        padding: 10vh 0;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    
+    }
+    
+    .mintWrapper {
+    
+        width: 60%;
+        height: auto;
+        padding: 2vh 0;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        font-size: 46px;
+        background: #fff;
+        border-radius: 30px;
+    
+    
+    }
+    
+    .mintWrapper>h3 {
+        font-size: 60px;
+        background-color: #fff;
+        text-align: center;
+    }
+    
+    
+    .mintWrapper>input,
+    .mintWrapper>div, .mintWrapper > p, .mintWrapper > p > span {
+    
+        background-color: #fff;
+    }
+    
+    
+    .rewardContainer {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    
+        padding: 10vh 0;
+        padding-bottom: 15vh;
+    
+    }
+    
+    
+    .rewardWrapper {
+        width: 60%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 0.6rem;
+        padding: 2vh 0;
+        font-size: 45px;
+        background: #fff;
+        border-radius: 20px;
+    
+    }
+    
+    
+    .rewardWrapper>p {
+        background: #fff;
+        width: 80%;
+        text-align: center;
+    
+    }
+    
+    
+    .rewardWrapper>h3 {
+        text-align: center;
+    
+    }
+    
+    
+    .rewardWrapper>p>span {
+        color: green;
+        font-weight: 600;
+        background: #fff;
+        text-align: center;
+    }
+    
+    
+    .totalContainer {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    
+        padding: 10vh 0;
+    
+    }
+    
+    
+    .totalContainer>h2 {
+        text-align: center;
+        font-size: 40px;
+        text-align: center;
+    }
+    
+    
+    
+    
+    
+    .logContainer {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    
+        padding: 10vh 0;
+    
+    }
+    
+    
+    
+    .logWrapper {
+    
+        width: 60%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 2vh 2vw;
+        font-size: 45px;
+        background: #fff;
+        border-radius: 20px;
+    
+    }
+    
+    
+    .logWrapper>table {
+        background: #fff;
+    }
+    
+    
+    .logWrapper>table>tbody>tr>td {
+        background: #fff !important;
+        padding: 5px;
+    }
+    
+    
+    .logWrapper>table>thead>tr>th {
+        background: lightgray;
+        padding: 5px;
+        font-size: 37px;
+    }
+    
+    
+    .nodeContainer {
+        width: 100%;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        background-color: #333;
+        padding: 17vh 0;
+    }
+    
+    
+    .nodeContainer>h2 {
+        font-size: 40px;
+        margin-bottom: 5vh;
+        background-color: #333;
+        text-align: center;
+    }
+    
+    
+    .upperWrapper {
+        width: 50%;
+        height: auto;
+        display: flex;
+        border-radius: 20px;
+        overflow: hidden;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+    
+    }
+    
+    
+    .littleWrapper {
+        width: 50%;
+        background: lightgray !important;
+    
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+    
+        padding: 2vh 0;
+        gap: 1rem;
+    
+    
+    
+    }
+    
+    
+    .littleWrapper>h3 {
+        font-size: 46px;
+        text-align: center;
+        background: lightgray !important;
+        text-align: center;
+    }
+    
+    
+    #specialLine {
+    
+        background: #fff !important;
+    
+    }
+    
+    #specialLine>h3 {
+        background: #fff !important;
+        text-align: center;
+    
+    
+    }
+    
+    
+    
+    .accountWrapper {
+        width: 30%;
+        background: #fff;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        flex-direction: column;
+        overflow: hidden;
+        padding: 2vh 0;
+        gap: 1rem;
+    
+        margin: 2vh 0;
+    
+    }
+    
+    
+    .accountWrapper>h3 {
+        font-size: 55px;
+        text-align: center;
+    }
+    
+    
+    
+    .footer {
+        width: 100%;
+        height: auto;
+    
+        margin: 4vh 0;
+    
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .footerWrapper {
+        width: 40%;
+        border-radius: 20px;
+        background: lightgray;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        padding: 3vh 0;
+        justify-content: center;
+        gap: 2rem;
+    }
+    
+    .footerWrapper>a,
+    .footerWrapper>p {
+        font-size: 40px;
+        background: lightgray;
+        width: 80%;
+        text-align: center;
+    }
+    
+    
+    .footerWrapper>.row {
+    
+        width: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        background: lightgray;
+    }
+    
+    
+    .row > .status {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+        gap: 2rem;
+        background: transparent
+    }
+    
+    .row > div {
+        background-color: transparent;
+    }
+    
+    .row > .status > span {
+        background: transparent;
+        font-size: 20px;
+    }
+    
+    
+    .row > .status > span > label {
+        background-color: transparent;
+    }
+    
+    
+    
+    
+    .footerWrapper>.row>p,
+    .footerWrapper>.row>a {
+    
+        font-size: 40px;
+        background: lightgray;
+        text-align: center;
+    
+    }
+    
+    
+    .footerWrapper>.row>p>span {
+        background-color: lightgray;
+        font-weight: 500;
+        color: green;
+        word-wrap: break-word;
+        text-align: center;
+    
+    }
+    
+    
+    .footerWrapper>p>span {
+        background-color: lightgray;
+        font-weight: 500;
+        color: green;
+        word-wrap: break-word;
+        text-align: center;
+    
+    }
+    
 
 
 
