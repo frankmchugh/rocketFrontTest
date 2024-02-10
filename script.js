@@ -23,6 +23,7 @@ const burnCheckbox = document.querySelector("#burn");
 const mintBtn = document.querySelector("#mintBtn");
 const mintInput = document.getElementById("mintInput");
 const burnBtn = document.querySelector("#burnBtn");
+const burnInput = document.getElementById("burnInput");
 const errorMessageEl = document.getElementById('errorMsg');
 const successMessageEl = document.getElementById('successMsg')
 
@@ -966,8 +967,6 @@ const mint = async () => {
 
     console.log("Mint started...");
 
-    etherscanLinkEL.style.display = "none";
-    openseaLinkEL.style.display = "none";
 
 
 
@@ -1020,7 +1019,7 @@ const mint = async () => {
         console.log(`Transaction hash: ${tx.hash}`);
         const tx_hash = await tx.wait();
         console.log("tx_hash:" + tx_hash);
-        const send = await signer.sendTransaction({tx})
+        //const send = await signer.sendTransaction({tx})
         successMessageEl.innerHTML = "Successfully Minted";
         mintBtn.innerHTML = "Mint";
         mintBtn.disabled = false;
@@ -1039,6 +1038,83 @@ const mint = async () => {
 }
 
 
+const burn = async () => {
+
+
+    //depositPoolContract deposit function instead of MINT
+    //
+
+
+    console.log("Burn started...");
+
+ 
+
+
+
+    burnBtn.innerHTML = "Burning...";
+    burnBtn.disabled = true;
+
+
+    let provider = new ethers.BrowserProvider(window.ethereum)
+
+ 
+    let signer = await browserProvider.getSigner()
+
+
+    //change ABI & address:  https://etherscan.io/address/0xdd3f50f8a6cafbe9b31a427582963f465e745af8#writeContract
+
+    const _contract = new ethers.Contract(rETHcontract, ERC20_ABI, signer);
+   
+
+
+        
+
+
+
+    
+
+    try {
+
+
+
+
+
+        let amount = burnInput.value;
+
+        let formatted = ethers.parseEther(amount)
+
+        console.log(formatted);
+        console.log(Object.values(_contract))
+
+
+        //const tx = await signer.sendTransaction(rocketPoolDepositContract.deposit({ value: formatted }))
+
+        //change function call too
+        const tx = await  _contract.connect(signer).burn(formatted);
+
+   
+        console.log(`Transaction hash: ${tx.hash}`);
+        const tx_hash = await tx.wait();
+        console.log("tx_hash:" + tx_hash);
+        //const send = await signer.sendTransaction({tx})
+        successMessageEl.innerHTML = "Successfully burnt!";
+        burnBtn.innerHTML = "Burn";
+        burnBtn.disabled = false;
+
+        console.log(`Transaction confirmed in block ${tx.bloc}`);
+        console.log(`Gas used: ${tx_hash.gasUsed.toString()}`);
+
+
+
+    } catch (e) {
+        errorMessageEl.innerHTML = `${e.message}`;
+        console.log(e.message)
+        burnBtn.innerHTML = "Burn";
+        burnBtn.disabled = false;
+    }
+}
+
+
 
 function initializeApp() {
     console.log("Going at least");
@@ -1050,7 +1126,9 @@ function initializeApp() {
         if (mintCheckbox.checked) {
             burnCheckbox.checked = false;
             mintBtn.classList.remove("hidden2");
+            mintInput.classList.remove("hidden2")
             burnBtn.classList.add("hidden2");
+            burnInput.classList.add("hidden2")
         } else {
             mintBtn.classList.add("hidden2");
         }
@@ -1062,6 +1140,8 @@ function initializeApp() {
             mintCheckbox.checked = false;
             burnBtn.classList.remove("hidden2");
             mintBtn.classList.add("hidden2");
+            mintInput.classList.add("hidden2")
+            burnInput.classList.remove("hidden2")
         } else {
             burnBtn.classList.add("hidden2");
         }
@@ -1073,6 +1153,7 @@ function initializeApp() {
 
 
     mintBtn.addEventListener("click", mint);
+    burnBtn.addEventListener("click", burn);
 }
 
 
